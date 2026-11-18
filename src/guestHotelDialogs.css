@@ -1,0 +1,897 @@
+/* The reservation desk uses the hotel's print palette for every guest transaction. */
+.guest dialog.gf-dialog {
+  --hotel-paper: #faf9f6;
+  --hotel-ink: #1b2924;
+  --hotel-pine: #183b32;
+  --hotel-brass: #a18750;
+  --hotel-muted: #5d665f;
+  --hotel-rule: #d8d4c9;
+  --g-ink: var(--hotel-ink);
+  --g-green: var(--hotel-pine);
+  --g-paper: var(--hotel-paper);
+  --g-line: var(--hotel-rule);
+  --g-muted: var(--hotel-muted);
+  --g-serif: 'PT Serif', Georgia, serif;
+  --g-sans: 'Golos Text', Arial, sans-serif;
+  --ax-ink: var(--hotel-ink);
+  --ax-paper: var(--hotel-paper);
+  --ax-acid: #ede7d7;
+  --ax-blue: var(--hotel-pine);
+  --ax-type: var(--g-serif);
+  color-scheme: light;
+  width: min(590px, calc(100vw - 48px));
+  max-width: calc(100vw - 28px);
+  max-height: min(90dvh, 920px);
+  margin: auto;
+  padding: 0;
+  color: var(--hotel-ink);
+  background: var(--hotel-paper);
+  border: 1px solid #d2cbb9;
+  border-radius: 3px;
+  box-shadow:
+    0 24px 100px #0b241f45,
+    0 2px 10px #0b241f1f;
+  font: 400 15px/1.55 var(--g-sans);
+  scrollbar-width: thin;
+  scrollbar-color: #bab5a7 var(--hotel-paper);
+}
+.guest dialog.gf-dialog.gf-wide {
+  width: min(800px, calc(100vw - 48px));
+}
+.guest dialog.gf-dialog::backdrop {
+  background: #12251ed1;
+  backdrop-filter: blur(5px);
+}
+.guest dialog.gf-dialog[open] {
+  animation: gf-hotel-arrive 0.3s cubic-bezier(0.16, 0.76, 0.25, 1);
+}
+@keyframes gf-hotel-arrive {
+  from {
+    transform: translateY(9px);
+    opacity: 0.84;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.guest dialog.gf-dialog [data-flow-content] {
+  padding: 0 34px 30px;
+}
+.guest dialog.gf-dialog .gf-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  min-height: 66px;
+  padding: 0;
+  margin: 0 0 24px;
+  border-bottom: 1px solid var(--hotel-rule);
+}
+.guest dialog.gf-dialog .gf-hotel-sign {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--hotel-pine);
+  font: 400 18px/1.1 var(--g-serif);
+  letter-spacing: -0.045em;
+}
+.guest dialog.gf-dialog .gf-hotel-sign .g-mark {
+  width: 25px;
+  height: 30px;
+  flex: none;
+  color: var(--hotel-brass);
+}
+.guest dialog.gf-dialog .gf-top-controls {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex: none;
+}
+.guest dialog.gf-dialog .gf-close {
+  width: 35px;
+  height: 35px;
+  min-height: 0;
+  border-radius: 50%;
+  color: var(--hotel-pine);
+  background: transparent;
+  border: 1px solid #c5c2b7;
+  box-shadow: none;
+  padding: 0;
+  transition:
+    color 0.16s,
+    background 0.16s,
+    border-color 0.16s;
+}
+.guest dialog.gf-dialog .gf-close:hover {
+  color: white;
+  border-color: var(--hotel-pine);
+  background: var(--hotel-pine);
+}
+.guest dialog.gf-dialog .gf-plain,
+.guest dialog.gf-dialog .gf-small {
+  font: 500 12px/1.3 var(--g-sans);
+  letter-spacing: 0;
+  color: var(--hotel-pine);
+  text-transform: none;
+  min-height: 32px;
+}
+.guest dialog.gf-dialog .gf-plain {
+  background: transparent;
+  border: 0;
+  padding: 0 2px;
+}
+.guest dialog.gf-dialog .gf-plain:hover,
+.guest dialog.gf-dialog .gf-small:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.guest dialog.gf-dialog .gf-steps {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+  color: #626a63;
+}
+.guest dialog.gf-dialog .gf-steps li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.guest dialog.gf-dialog .gf-steps li + li:before {
+  content: '';
+  width: 20px;
+  margin-right: 1px;
+  border-top: 1px solid #c9c5b9;
+}
+.guest dialog.gf-dialog .gf-steps li > span {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #c6c4b9;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.guest dialog.gf-dialog .gf-steps [aria-current='step'] {
+  font-weight: 600;
+  color: var(--hotel-pine);
+}
+.guest dialog.gf-dialog .gf-steps [aria-current='step'] span {
+  background: var(--hotel-pine);
+  border-color: var(--hotel-pine);
+  color: white;
+}
+.guest dialog.gf-dialog .gf-step-complete span {
+  background: #edeadf;
+  border-color: #c3b594;
+}
+.guest dialog.gf-dialog .gf-title {
+  font: 400 clamp(31px, 3.45vw, 47px)/1.12 var(--g-serif);
+  letter-spacing: -0.048em;
+  color: var(--hotel-pine);
+  margin: 0 0 20px;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+.guest dialog.gf-dialog .gf-title:focus {
+  outline: none;
+}
+.guest dialog.gf-dialog .gf-sub {
+  margin: -10px 0 20px;
+  color: var(--hotel-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.guest dialog.gf-dialog .gf-body {
+  min-width: 0;
+}
+.guest dialog.gf-dialog .gf-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 14px;
+}
+.guest dialog.gf-dialog .gf-field,
+.guest dialog.gf-dialog .gf-label {
+  color: var(--hotel-ink);
+  font: 500 13px/1.4 var(--g-sans);
+  letter-spacing: 0;
+  text-transform: none;
+  gap: 6px;
+  margin: 14px 0 0;
+}
+.guest dialog.gf-dialog form > .gf-field:first-child,
+.guest dialog.gf-dialog form > .gf-columns:first-child > .gf-field {
+  margin-top: 0;
+}
+.guest dialog.gf-dialog .gf-field :is(input, textarea, select),
+.guest dialog.gf-dialog .gf-date {
+  min-width: 0;
+  min-height: 47px;
+  border: 1px solid #b9b9ad;
+  border-radius: 2px;
+  background: #fffefa;
+  color: var(--hotel-ink);
+  padding: 11px 13px;
+  font: 400 15px/1.4 var(--g-sans);
+  letter-spacing: 0;
+  transition:
+    border-color 0.16s,
+    box-shadow 0.16s;
+}
+.guest dialog.gf-dialog .gf-field select {
+  padding-right: 30px;
+}
+.guest dialog.gf-dialog .gf-date {
+  display: flex;
+  height: 47px;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  line-height: 1.2;
+}
+.guest dialog.gf-dialog .gf-date > svg {
+  color: var(--hotel-brass);
+}
+.guest dialog.gf-dialog .gf-field .gf-date > input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+  box-shadow: none;
+}
+.guest dialog.gf-dialog .gf-field :is(input, select, textarea):focus,
+.guest dialog.gf-dialog .gf-date:focus-within {
+  border-color: var(--hotel-pine);
+  outline: 2px solid #557e6b;
+  outline-offset: 1px;
+}
+.guest dialog.gf-dialog .gf-field :is(input, textarea)::placeholder {
+  color: #72796e;
+}
+.guest dialog.gf-dialog .gf-field textarea {
+  min-height: 76px;
+}
+.guest dialog.gf-dialog .gf-muted {
+  color: var(--hotel-muted);
+  font: 400 12px/1.55 var(--g-sans);
+  margin: 14px 0 0;
+}
+.guest dialog.gf-dialog .gf-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-wrap: wrap;
+  margin: 23px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--hotel-rule);
+}
+.guest dialog.gf-dialog .gf-primary,
+.guest dialog.gf-dialog .gf-secondary {
+  min-height: 45px;
+  padding: 12px 19px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 2px;
+  border: 1px solid var(--hotel-pine);
+  box-shadow: none;
+  text-transform: none;
+  letter-spacing: 0.005em;
+  font: 500 13px/1.3 var(--g-sans);
+  transition:
+    background 0.18s,
+    border-color 0.18s,
+    color 0.18s;
+}
+.guest dialog.gf-dialog .gf-primary {
+  background: var(--hotel-pine);
+  color: white;
+}
+.guest dialog.gf-dialog .gf-primary:hover {
+  background: #295346;
+  border-color: #295346;
+  color: white;
+}
+.guest dialog.gf-dialog .gf-primary svg {
+  transition: transform 0.18s;
+}
+.guest dialog.gf-dialog .gf-primary:hover svg {
+  transform: translateX(2px);
+}
+.guest dialog.gf-dialog .gf-secondary {
+  color: var(--hotel-pine);
+  background: transparent;
+  border-color: #a4afa1;
+}
+.guest dialog.gf-dialog .gf-secondary:hover {
+  color: var(--hotel-ink);
+  background: #eeeee6;
+  border-color: #687b69;
+}
+.guest dialog.gf-dialog :is(button, input, textarea, select, summary, a):focus-visible {
+  outline: 2px solid #3f735d;
+  outline-offset: 3px;
+}
+.guest dialog.gf-dialog [type='submit']:disabled,
+.guest dialog.gf-dialog [type='submit']:disabled:hover {
+  background: #e4e3dc;
+  color: #686d64;
+  border-color: #d0cfc6;
+  box-shadow: none;
+}
+.guest dialog.gf-dialog .gf-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-bottom: 1px solid var(--hotel-rule);
+}
+.guest dialog.gf-dialog .gf-room {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 142px minmax(0, 1fr) auto 15px;
+  gap: 17px;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+  padding: 14px 0;
+  border: 0;
+  border-top: 1px solid var(--hotel-rule);
+  background: transparent;
+  box-shadow: none;
+}
+.guest dialog.gf-dialog .gf-room:hover {
+  background: #f0efe7;
+}
+.guest dialog.gf-dialog .gf-room .gf-room-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.54;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.guest dialog.gf-dialog .gf-room img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: transform 0.35s;
+}
+.guest dialog.gf-dialog .gf-room:hover img {
+  transform: scale(1.035);
+}
+.guest dialog.gf-dialog .gf-room-info,
+.guest dialog.gf-dialog .gf-room-price {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 5px;
+}
+.guest dialog.gf-dialog .gf-room strong {
+  font: 400 clamp(19px, 2vw, 24px)/1.16 var(--g-serif);
+  letter-spacing: -0.03em;
+  color: var(--hotel-ink);
+}
+.guest dialog.gf-dialog .gf-room small,
+.guest dialog.gf-dialog .gf-room em {
+  font: 400 12px/1.35 var(--g-sans);
+  color: var(--hotel-muted);
+}
+.guest dialog.gf-dialog .gf-room-price {
+  align-items: flex-end;
+  text-align: right;
+  white-space: nowrap;
+}
+.guest dialog.gf-dialog .gf-room-price b {
+  font: 500 16px/1.3 var(--g-sans);
+  color: var(--hotel-pine);
+}
+.guest dialog.gf-dialog .gf-room > svg {
+  color: var(--hotel-brass);
+}
+.guest dialog.gf-dialog .gf-times {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(66px, 1fr));
+  gap: 6px;
+  margin-top: 8px;
+}
+.guest dialog.gf-dialog .gf-times button {
+  min-height: 37px;
+  padding: 7px 5px;
+  color: var(--hotel-pine);
+  background: #fffefa;
+  border: 1px solid #c4c4b7;
+  border-radius: 2px;
+  font: 500 13px/1.25 var(--g-sans);
+  font-variant-numeric: tabular-nums;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+.guest dialog.gf-dialog .gf-times button:hover {
+  background: #eeeade;
+  border-color: #9a9c88;
+}
+.guest dialog.gf-dialog .gf-times button[aria-pressed='true'] {
+  background: var(--hotel-pine);
+  border-color: var(--hotel-pine);
+  color: white;
+}
+.guest dialog.gf-dialog .gf-times > .gf-empty {
+  grid-column: 1/-1;
+}
+.guest dialog.gf-dialog .gf-recap {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 14px 15px;
+  margin: 0 0 17px;
+  border: 1px solid #cfc7ac;
+  border-left: 3px solid var(--hotel-brass);
+  background: #f2efe5;
+  color: var(--hotel-ink);
+  border-radius: 1px;
+}
+.guest dialog.gf-dialog .gf-recap svg {
+  width: 20px;
+  height: 20px;
+  color: #7b673d;
+}
+.guest dialog.gf-dialog .gf-recap strong {
+  font: 400 20px/1.2 var(--g-serif);
+  letter-spacing: -0.025em;
+  color: var(--hotel-ink);
+}
+.guest dialog.gf-dialog .gf-recap span {
+  color: #515b51;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.guest dialog.gf-dialog .gf-empty,
+.guest dialog.gf-dialog .gf-error {
+  font: 400 14px/1.5 var(--g-sans);
+  border-radius: 2px;
+  padding: 14px 16px;
+}
+.guest dialog.gf-dialog .gf-empty {
+  background: #efede4;
+  color: #4d594f;
+}
+.guest dialog.gf-dialog .gf-error {
+  background: #f7ebe4;
+  color: #843e30;
+  border-left: 3px solid #ad6e56;
+}
+.guest dialog.gf-dialog .gf-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #3e624c;
+  font-size: 13px;
+  margin: -6px 0 15px;
+}
+.guest dialog.gf-dialog .gf-success svg {
+  background: #e2eadd;
+  border-radius: 50%;
+  padding: 3px;
+  width: 23px;
+  height: 23px;
+}
+.guest dialog.gf-dialog .gf-record:not(.gf-receipt) {
+  padding: 15px 0 18px;
+  border: 0;
+  border-block-start: 1px solid var(--hotel-rule);
+}
+.guest dialog.gf-dialog .gf-record h3,
+.guest dialog.gf-dialog .gf-ticket-main h3 {
+  font: 400 27px/1.16 var(--g-serif);
+  letter-spacing: -0.04em;
+  color: var(--hotel-pine);
+}
+.guest dialog.gf-dialog .gf-record p,
+.guest dialog.gf-dialog .gf-id {
+  color: var(--hotel-muted);
+}
+.guest dialog.gf-dialog .gf-record-top > small {
+  text-transform: none;
+  font: 500 12px/1.2 var(--g-sans);
+  letter-spacing: 0;
+  color: var(--hotel-muted);
+}
+.guest dialog.gf-dialog .gf-status {
+  color: #31503b;
+  background: #e8ecdf;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+.guest dialog.gf-dialog .gf-id {
+  font-size: 12px;
+}
+.guest dialog.gf-dialog .gf-record-actions {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.guest dialog.gf-dialog .gf-small {
+  border: 0;
+  border-bottom: 1px solid #aeac94;
+  gap: 4px;
+  padding: 3px 0;
+  white-space: normal;
+  background: transparent;
+}
+.guest dialog.gf-dialog .gf-small[data-f='cancel-check'] {
+  color: #765147;
+}
+.guest dialog.gf-dialog .gf-lookup {
+  padding: 14px 0 0;
+  border-top: 1px solid var(--hotel-rule);
+}
+.guest dialog.gf-dialog .gf-lookup summary {
+  font: 500 14px/1.5 var(--g-sans);
+  color: var(--hotel-pine);
+}
+.guest dialog.gf-dialog .gf-lookup[open] summary {
+  margin-bottom: 14px;
+}
+.guest dialog.gf-dialog .gf-receipt {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  padding: 0;
+  margin: 15px 0 0;
+  border: 1px solid #c8c4b7;
+  border-radius: 2px;
+  background: #fffefa !important;
+  box-shadow: none;
+}
+.guest dialog.gf-dialog .gf-ticket-spine,
+.guest dialog.gf-dialog .gf-slip .gf-ticket-spine {
+  background: var(--hotel-pine);
+  border: 0;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 0;
+}
+.guest dialog.gf-dialog .gf-ticket-spine i {
+  display: none;
+}
+.guest dialog.gf-dialog .gf-ticket-spine .g-mark {
+  color: #e2d1a9;
+  width: 26px;
+  height: 32px;
+}
+.guest dialog.gf-dialog .gf-ticket-main {
+  padding: 18px 19px;
+}
+.guest dialog.gf-dialog .gf-ticket-id {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  flex-wrap: wrap;
+  color: var(--hotel-muted);
+  font: 500 11px/1.35 var(--g-sans);
+}
+.guest dialog.gf-dialog .gf-ticket-id b {
+  color: var(--hotel-ink);
+  font: 500 12px/1.35 var(--g-sans);
+  letter-spacing: 0.035em;
+  overflow-wrap: anywhere;
+}
+.guest dialog.gf-dialog .gf-ticket-main h3 {
+  margin: 13px 0 15px;
+}
+.guest dialog.gf-dialog .gf-ticket-data {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+.guest dialog.gf-dialog .gf-ticket-data dt,
+.guest dialog.gf-dialog .gf-ticket-total span {
+  font: 400 11px/1.45 var(--g-sans);
+  color: var(--hotel-muted);
+}
+.guest dialog.gf-dialog .gf-ticket-data dd {
+  font: 500 13px/1.42 var(--g-sans);
+  color: var(--hotel-ink);
+  margin-top: 2px;
+}
+.guest dialog.gf-dialog .gf-ticket-total {
+  border-top: 1px solid #cec9b7;
+  margin-top: 16px;
+  padding-top: 10px;
+}
+.guest dialog.gf-dialog .gf-ticket-total strong {
+  font: 400 25px/1.2 var(--g-serif);
+  color: var(--hotel-pine);
+  letter-spacing: -0.035em;
+}
+.guest dialog.gf-dialog .g-detail-facts,
+.guest dialog.gf-dialog .g-detail-desc,
+.guest dialog.gf-dialog .g-service-details {
+  color: var(--hotel-ink);
+}
+.guest dialog.gf-dialog .g-amenities li {
+  background: #efede5;
+  color: #455649;
+  border-radius: 2px;
+}
+.guest dialog.gf-dialog .g-detail-footer {
+  border-color: var(--hotel-rule);
+}
+.guest dialog.gf-dialog.g-panorama-dialog {
+  width: min(1120px, calc(100vw - 36px));
+  max-height: 93dvh;
+}
+.guest dialog.gf-dialog.g-panorama-dialog [data-flow-content] {
+  padding-bottom: 23px;
+}
+.guest dialog.gf-dialog.g-panorama-dialog .g-panorama > img {
+  border-radius: 2px;
+}
+@media (max-width: 650px) {
+  .guest dialog.gf-dialog [data-flow-content] {
+    padding-inline: 23px;
+    padding-bottom: 23px;
+  }
+  .guest dialog.gf-dialog .gf-room {
+    grid-template-columns: 103px minmax(0, 1fr) 15px;
+    align-items: center;
+    gap: 4px 12px;
+  }
+  .guest dialog.gf-dialog .gf-room .gf-room-photo {
+    grid-column: 1;
+    grid-row: 1/3;
+    height: 82px;
+    aspect-ratio: auto;
+  }
+  .guest dialog.gf-dialog .gf-room-info {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .guest dialog.gf-dialog .gf-room-price {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    text-align: left;
+  }
+  .guest dialog.gf-dialog .gf-room > svg {
+    grid-column: 3;
+    grid-row: 1/3;
+  }
+}
+@media (max-width: 470px) {
+  .guest dialog.gf-dialog,
+  .guest dialog.gf-dialog.gf-wide,
+  .guest dialog.gf-dialog.g-panorama-dialog {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    max-height: calc(100dvh - 18px);
+    border-radius: 3px;
+  }
+  .guest dialog.gf-dialog [data-flow-content] {
+    padding: 0 17px 19px;
+  }
+  .guest dialog.gf-dialog .gf-top {
+    min-height: 54px;
+    margin-bottom: 18px;
+  }
+  .guest dialog.gf-dialog .gf-hotel-sign {
+    font-size: 16px;
+    gap: 6px;
+  }
+  .guest dialog.gf-dialog .gf-hotel-sign .g-mark {
+    width: 21px;
+    height: 25px;
+  }
+  .guest dialog.gf-dialog .gf-top-controls {
+    gap: 9px;
+  }
+  .guest dialog.gf-dialog .gf-close {
+    width: 33px;
+    height: 33px;
+  }
+  .guest dialog.gf-dialog .gf-steps {
+    gap: 6px;
+    margin-bottom: 11px;
+  }
+  .guest dialog.gf-dialog .gf-steps li + li:before {
+    width: 12px;
+  }
+  .guest dialog.gf-dialog .gf-title {
+    font-size: 31px;
+    line-height: 1.13;
+    margin: 0 0 17px;
+    letter-spacing: -0.045em;
+  }
+  .guest dialog.gf-dialog .gf-field :is(input, select, textarea),
+  .guest dialog.gf-dialog .gf-date {
+    font-size: 16px;
+    min-height: 45px;
+    padding: 9px 10px;
+  }
+  .guest dialog.gf-dialog .gf-sub {
+    font-size: 13px;
+    margin: -6px 0 14px;
+  }
+  .guest dialog.gf-dialog .gf-columns {
+    gap: 0 8px;
+  }
+  .guest dialog.gf-dialog [data-form='inquiry'] .gf-columns,
+  .guest dialog.gf-dialog [data-form='lookup'] .gf-columns {
+    grid-template-columns: 1fr;
+  }
+  .guest dialog.gf-dialog .gf-room {
+    grid-template-columns: 80px minmax(0, 1fr) 12px;
+    gap: 3px 9px;
+    padding-block: 11px;
+  }
+  .guest dialog.gf-dialog .gf-room .gf-room-photo {
+    height: 80px;
+  }
+  .guest dialog.gf-dialog .gf-room strong {
+    font-size: 19px;
+  }
+  .guest dialog.gf-dialog .gf-room-info small,
+  .guest dialog.gf-dialog .gf-room-price em {
+    font-size: 11px;
+  }
+  .guest dialog.gf-dialog .gf-room-price b {
+    font-size: 14px;
+  }
+  .guest dialog.gf-dialog .gf-times {
+    grid-template-columns: repeat(auto-fill, minmax(54px, 1fr));
+    gap: 5px;
+  }
+  .guest dialog.gf-dialog .gf-times button {
+    min-height: 38px;
+    padding: 6px 3px;
+    font-size: 12px;
+  }
+  .guest dialog.gf-dialog .gf-actions {
+    margin-top: 18px;
+    padding-top: 15px;
+    gap: 9px;
+  }
+  .guest dialog.gf-dialog .gf-actions > :is(.gf-primary, .gf-secondary) {
+    width: 100%;
+  }
+  .guest dialog.gf-dialog .gf-ticket-main {
+    padding: 14px 12px;
+  }
+  .guest dialog.gf-dialog .gf-receipt {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+  .guest dialog.gf-dialog .gf-ticket-spine .g-mark {
+    width: 19px;
+    height: 24px;
+  }
+  .guest dialog.gf-dialog .gf-ticket-main h3 {
+    font-size: 23px;
+  }
+  .guest dialog.gf-dialog .gf-ticket-data {
+    gap: 8px;
+  }
+  .guest dialog.gf-dialog .gf-ticket-data dd {
+    font-size: 12px;
+  }
+  .guest dialog.gf-dialog .gf-ticket-total strong {
+    font-size: 22px;
+  }
+}
+@media (max-width: 355px) {
+  .guest dialog.gf-dialog [data-flow-content] {
+    padding-inline: 13px;
+  }
+  .guest dialog.gf-dialog [data-form='time'] .gf-columns {
+    grid-template-columns: 1fr;
+  }
+  .guest dialog.gf-dialog .gf-room {
+    grid-template-columns: 68px minmax(0, 1fr) 10px;
+  }
+  .guest dialog.gf-dialog .gf-room .gf-room-photo {
+    height: 72px;
+  }
+  .guest dialog.gf-dialog .gf-step-complete,
+  .guest dialog.gf-dialog .gf-steps li {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guest dialog.gf-dialog[open],
+  .guest dialog.gf-dialog *,
+  .guest dialog.gf-dialog *::before,
+  .guest dialog.gf-dialog *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (min-width: 651px) {
+  .guest dialog.gf-dialog[data-gf-screen='contact'] {
+    width: min(650px, calc(100vw - 48px));
+  }
+  .guest dialog.gf-dialog[data-gf-flow='stay'][data-gf-screen='contact'] [data-form='save'] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 14px;
+  }
+  .guest
+    dialog.gf-dialog[data-gf-flow='stay'][data-gf-screen='contact']
+    [data-form='save']
+    > :is(.gf-field:first-child, .gf-field:has(textarea), .gf-muted, .gf-actions) {
+    grid-column: 1/-1;
+  }
+}
+.guest.g-accessible dialog.gf-dialog {
+  --hotel-ink: #111a14;
+  --hotel-muted: #344237;
+  --hotel-rule: #8b9689;
+}
+.guest.g-accessible
+  dialog.gf-dialog
+  :is(
+    .gf-sub,
+    .gf-field,
+    .gf-label,
+    .gf-muted,
+    .gf-room small,
+    .gf-room em,
+    .gf-status,
+    .gf-ticket-data dt,
+    .gf-ticket-id,
+    .gf-ticket-total span,
+    .gf-recap span,
+    .gf-record p,
+    .gf-record-top > small,
+    .gf-plain,
+    .gf-small,
+    .gf-success
+  ) {
+  font-size: 16px;
+}
+.guest.g-accessible
+  dialog.gf-dialog
+  :is(
+    .gf-field input,
+    .gf-field select,
+    .gf-field textarea,
+    .gf-date,
+    .gf-primary,
+    .gf-secondary,
+    .gf-ticket-data dd
+  ) {
+  font-size: 17px;
+}
+.guest.g-accessible dialog.gf-dialog .gf-times {
+  grid-template-columns: repeat(auto-fill, minmax(66px, 1fr));
+}
+.guest.g-accessible dialog.gf-dialog .gf-times button {
+  font-size: 16px;
+  min-height: 43px;
+}
+.guest.g-accessible dialog.gf-dialog .gf-steps li {
+  font-size: 13px;
+}
